@@ -35,10 +35,19 @@ const App=()=> {
     },
   ]
 
+  let addExpenseData = expense =>{
+     console.log('In App js')
+     let addItem = {
+      ...expense,
+      id:Math.random()
+     }
+     console.log(addItem,"addItem1");
+  }
+
   return (
     <div>
       
-      <NewExpense />
+      <NewExpense onAddExpense={addExpenseData} />
       <Expenses items={expenses}/>
     </div>
    
