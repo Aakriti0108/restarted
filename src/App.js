@@ -5,24 +5,43 @@ import Expense from './components/NewExpenses/expense';
 const App=()=> {
   const [userList,setUserList] = useState([]);
 
-  const AddUserHandler = (productName,productQty,productPrice) => {
+  const AddUserHandler = (UI,Price,dish,table) => {
     setUserList((prevUserList)=>{
-      return[...prevUserList,{productName:productName,productQty:productQty,productPrice:productPrice,id:Math.random().toString()}]
+      return[...prevUserList,{UI:UI,Price:Price,dish:dish,table:table,id:Math.random().toString()}]
     })
   }
 
-  const dataPointValues = userList.reduce((totalCalories, meal) => totalCalories + parseInt(meal.productPrice), 0);
- 
+  let deleteHandler = (index)=>{
+    console.log("delete expense",index)
+    userList.splice(index,1)
+    setUserList([...userList])
+
+  }
  
   
   return (
     <div>
      <Expense AddUser={AddUserHandler} />
      <ul>
-         {userList.map(user=>
-         <li key={user.productName}>{user.productPrice} total price of product <button >Delete expense</button></li>
+      <li>Table 1</li>
+         {userList.filter(user =>user.table === "Table 1")
+         .map ((user,i)=>
+         <li key={user.UI}>{user.Price} total price of product <button onClick={()=>deleteHandler(i)}>Delete expense</button></li>
          )}
-          <p>Total Price: ${dataPointValues}</p>
+         </ul>
+         <ul>
+         <li>Table 2</li>
+         {userList.filter(user =>user.table === "Table 2")
+         .map ((user,i)=>
+         <li key={user.UI}>{user.Price} total price of product <button onClick={()=>deleteHandler(i)}>Delete expense</button></li>
+         )}
+         </ul>
+         <ul>
+         <li>Table 3</li>
+         {userList.filter(user =>user.table === "Table 3")
+         .map ((user,i)=>
+         <li key={user.UI}>{user.Price} total price of product <button onClick={()=>deleteHandler(i)}>Delete expense</button></li>
+         )}
          </ul>
     </div>
    

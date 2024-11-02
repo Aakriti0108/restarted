@@ -2,40 +2,54 @@ import React,{useState} from "react";
 
 const Expense = (props) =>{
 
-    let [productName,setProductName] = useState('');
-    let [Quantity,setQuantity] = useState();
-    let [productPrice,setProductPrice] = useState(); 
+    let [UI,setUI] = useState();
+    let [Price,setPrice] = useState();
+    let [dish,setDish] = useState(); 
+    let [selectedValue,setselectedValue] = useState(); 
 
     const submitHandler = (event) =>{
         event.preventDefault();
 
-        props.AddUser(productName,Quantity,productPrice)
-        console.log(productName,Quantity,productPrice)
-        setProductName('')
-        setQuantity(0)
-        setProductPrice(0)
+        props.AddUser(UI,Price,dish,selectedValue)
+        console.log(UI,Price,dish,selectedValue)
+        setUI("")
+        setPrice("")
+        setDish("")
     }
     
-    let productNameChange = (event) =>{
-        setProductName(event.target.value)
+    let UINameChange = (event) =>{
+        setUI(event.target.value)
     }
 
-    let productQtyChange = (event) =>{
-        setQuantity(event.target.value)
+    let PriceChange = (event) =>{
+        setPrice(event.target.value)
     }
 
-    let productPriceChange = (event) =>{
-        setProductPrice(event.target.value)
+    let dishChange = (event) =>{
+        setDish(event.target.value)
     }
+
+    let IdChange = (event) =>{
+        
+        setselectedValue(event.target.value)
+    }
+
+    
 
     return(
         <form onSubmit={submitHandler}>
-           <label htmlFor="productName">Product Name</label>
-           <input id="productName" type="text" onChange={productNameChange}/>
-           <label htmlFor="productQty">Product Qty</label>
-           <input id="productQty" type="number" onChange={productQtyChange}/>
-           <label htmlFor="productPrice">Product Price</label>
-           <input id="productPrice" type="number" onChange={productPriceChange}/>
+           <label htmlFor="UnquieId">UnquieId</label>
+           <input id="UnquieId" type="number"  onChange={UINameChange}/>
+           <label htmlFor="Price">Choose Price</label>
+           <input id="Price" type="number"  onChange={PriceChange}/>
+           <label htmlFor="Dish">Choose Dish</label>
+           <input id="Dish" type="text" onChange={dishChange}/>
+           <select  value={selectedValue} onChange={IdChange}>
+           <option value="">Select an option</option>
+            <option value="Table 1">Table 1</option>
+            <option value="Table 2">Table 2</option>
+            <option value="Table 3">Table 3</option>
+            </select>
            <button type="submit">Submit</button>
         </form>
     )
